@@ -13,7 +13,7 @@ export default function Home() {
         <header className="container mx-auto px-4 py-6">
           <nav className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
-              <span className="text-xl font-bold text-purple-300">Bug Buster</span>
+              <img src="https://res.cloudinary.com/dwpzkfzuv/image/upload/v1758207647/img_uu86og.png" alt="Bug Buster Logo" className="h-36 w-36 rounded-full shadow-md" />
             </div>
             <Link href="/coordinator">
               <Button variant="outline" className="border-purple-500 text-purple-300 hover:bg-purple-500/10">
@@ -27,22 +27,24 @@ export default function Home() {
         <main className="container mx-auto px-4 py-12 lg:py-20">
           <div className="max-w-4xl mx-auto text-center">
             {/* Main Title */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              The{' '}
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent animate-glow">
-                "Bug Buster"
-              </span>{' '}
-              Arena
+            <h1 className="text-4xl md:text-4xl lg:text-4xl font-bold text-white mb-6 leading-tight">
+              Dhanalakshmi Srinivasan Engineering College (Autonomous)
+            </h1>
+            <h1 className="text-3xl md:text-3xl lg:text-3xl font-bold text-white mb-6 leading-tight">
+              Department of Artificial Intelligence & Data Science
             </h1>
             
             {/* Subtitle */}
-            <p className="text-xl md:text-2xl text-purple-200 mb-8 font-medium">
-              Welcome to the Python Debugging Arena.
+            <p className="text-xl md:text-2xl text-purple-200 mb-2 font-medium">
+              Organizing Debugging program
             </p>
-            
+            <p className="text-3xl md:text-4xl mb-8 font-bold bg-gradient-to-r from-purple-500 via-sky-400 to-blue-900 bg-clip-text text-transparent animate-glow drop-shadow-[0_0_20px_rgba(109,40,217,0.7)]">
+              Bug Buster
+            </p>
+
             {/* Description */}
             <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-              You've got 30 broken Python snippets and 30 minutes on the clock. 
+              You've got 13 broken Python snippets and 30 minutes on the clock. 
               No shortcuts, no gimmicks – just you, your skills, and a sea of bugs 
               waiting to be crushed.
             </p>
