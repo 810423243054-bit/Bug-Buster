@@ -18,6 +18,7 @@ interface StudentData {
   name: string;
 }
 
+
 export default function ChallengePage() {
   const [timeLeft, setTimeLeft] = useState(30 * 60); // 45 minutes in seconds
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -26,6 +27,20 @@ export default function ChallengePage() {
   const [submitting, setSubmitting] = useState(false);
   const [challengeStarted, setChallengeStarted] = useState(false);
   const router = useRouter();
+
+  // Auto-submit if user leaves the tab
+  useEffect(() => {
+    if (!challengeStarted) return;
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        handleAutoSubmit();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [challengeStarted, studentData]);
 
   // Strictly block browser back/refresh/close while challenge is active
   useEffect(() => {
@@ -129,21 +144,23 @@ export default function ChallengePage() {
         const userNormalized = normalize(userAnswer);
         const correctNormalized = normalize(question.correctAnswer);
         const isCorrect = userNormalized === correctNormalized;
-        console.log(`Q${index + 1}:`, { userAnswer, correctAnswer: question.correctAnswer, isCorrect });
         if (isCorrect) {
           score += 1;
         }
       });
-      console.log('Total score:', score);
 
-      // Upsert score into score_table
+      // Set status based on submission type
+      const status = autoSubmit ? 'disqualified' : 'completed';
+
+      // Upsert score and status into score_table
       const { error } = await supabase
         .from('score_table')
         .upsert([
           {
             register_number: studentData!.registerNumber,
             student_name: studentData!.name,
-            score: score
+            score: score,
+            status: status
           }
         ], { onConflict: 'register_number' });
 
@@ -158,7 +175,7 @@ export default function ChallengePage() {
       sessionStorage.removeItem('studentData');
 
       if (autoSubmit) {
-        toast.info('Time\'s up! Your answers have been automatically submitted.');
+        toast.info('You have been disqualified for leaving the tab. Your answers have been submitted.');
       } else {
         toast.success('Challenge completed successfully!');
       }
