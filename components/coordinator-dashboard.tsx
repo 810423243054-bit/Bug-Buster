@@ -15,6 +15,7 @@ interface ScoreRow {
   register_number: string | number;
   student_name: string;
   score: number;
+  status?: string;
 }
 
 export function CoordinatorDashboard() {
@@ -181,9 +182,6 @@ export function CoordinatorDashboard() {
             <Card className="bg-white/10 backdrop-blur-lg border-white/20">
               <CardHeader>
                 <CardTitle className="text-white">Score Table</CardTitle>
-                <CardDescription className="text-purple-200">
-                  Live rows from the `public.score_table` table
-                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
@@ -193,6 +191,7 @@ export function CoordinatorDashboard() {
                         <TableHead className="text-purple-200">Register No.</TableHead>
                         <TableHead className="text-purple-200">Student Name</TableHead>
                         <TableHead className="text-purple-200">Score</TableHead>
+                        <TableHead className="text-purple-200">Status</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -203,6 +202,15 @@ export function CoordinatorDashboard() {
                           <TableCell className="text-white">
                             <Badge variant="outline" className="border-green-500 text-green-400">
                               {row.score}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="text-white">
+                            <Badge variant="outline" className={
+                              row.status === 'disqualified'
+                                ? 'border-red-500 text-red-400'
+                                : 'border-blue-500 text-blue-400'
+                            }>
+                              {row.status ? row.status.charAt(0).toUpperCase() + row.status.slice(1) : '—'}
                             </Badge>
                           </TableCell>
                         </TableRow>
