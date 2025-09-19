@@ -55,11 +55,12 @@ export function CoordinatorDashboard() {
 
   const exportResults = () => {
     const csvContent = [
-      ['Register Number', 'Student Name', 'Score'].join(','),
+      ['Register Number', 'Student Name', 'Score', 'Status'].join(','),
       ...scores.map(row => [
         row.register_number,
         row.student_name,
-        row.score
+        row.score,
+        row.status ? row.status.charAt(0).toUpperCase() + row.status.slice(1) : ''
       ].join(','))
     ].join('\n');
 
@@ -159,19 +160,27 @@ export function CoordinatorDashboard() {
 
         {/* Data Tables */}
         <Tabs defaultValue="submissions" className="w-full">
-          <div className="flex justify-between items-center mb-4">
-            <TabsList className="bg-white/10 border-white/20">
-              <TabsTrigger value="submissions" className="data-[state=active]:bg-purple-600">
-                Submissions & Scores
-              </TabsTrigger>
-            </TabsList>
-
-            <div className="flex items-center gap-2">
-              <Button onClick={fetchData} className="bg-blue-600 hover:bg-blue-700" disabled={loading}>
+          <div className="flex flex-col gap-2 mb-4">
+            <div className="flex items-center">
+              <TabsList className="bg-white/10 border-white/20">
+                <TabsTrigger value="submissions" className="data-[state=active]:bg-purple-600">
+                  Submissions & Scores
+                </TabsTrigger>
+              </TabsList>
+            </div>
+            <div className="flex flex-col md:flex-row gap-2 w-full mt-2">
+              <Button
+                onClick={fetchData}
+                className="bg-blue-600 hover:bg-blue-700 md:w-auto w-full"
+                disabled={loading}
+              >
                 <RefreshCw className="w-4 h-4 mr-2" />
                 Refresh
               </Button>
-              <Button onClick={exportResults} className="bg-green-600 hover:bg-green-700">
+              <Button
+                onClick={exportResults}
+                className="bg-green-600 hover:bg-green-700 md:w-auto w-full"
+              >
                 <Download className="w-4 h-4 mr-2" />
                 Export Results
               </Button>
