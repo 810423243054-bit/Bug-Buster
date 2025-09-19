@@ -38,10 +38,10 @@ export default function Home() {
             <p className="text-xl md:text-2xl text-purple-200 mb-2 font-medium">
               Organizing Debugging program
             </p>
-            <p className="text-3xl md:text-4xl mb-8 font-bold bg-gradient-to-r from-purple-500 via-sky-400 to-blue-900 bg-clip-text text-transparent animate-glow drop-shadow-[0_0_20px_rgba(109,40,217,0.7)]">
+            <p className="text-3xl md:text-4xl mb-2 font-bold bg-gradient-to-r from-purple-500 via-sky-400 to-blue-900 bg-clip-text text-transparent animate-glow drop-shadow-[0_0_20px_rgba(109,40,217,0.7)]">
               Bug Buster
             </p>
-            <p className="text-xl md:text-2xl text-purple-200 mb-2 font-medium">
+            <p className="text-xl md:text-2xl text-purple-200 mb-8 font-medium">
               Date: 22-09-2025
             </p>
 
