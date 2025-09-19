@@ -149,8 +149,9 @@ export default function ChallengePage() {
         }
       });
 
-      // Set status based on submission type
+      // Set status and score for disqualified users
       const status = autoSubmit ? 'disqualified' : 'completed';
+      const finalScore = status === 'disqualified' ? 0 : score;
 
       // Upsert score and status into score_table
       const { error } = await supabase
@@ -159,7 +160,7 @@ export default function ChallengePage() {
           {
             register_number: studentData!.registerNumber,
             student_name: studentData!.name,
-            score: score,
+            score: finalScore,
             status: status
           }
         ], { onConflict: 'register_number' });
