@@ -24,7 +24,7 @@ export default function Home() {
         </header>
 
         {/* Hero Section */}
-        <main className="container mx-auto px-4 py-8 lg:py-20">
+        <main className="container mx-auto px-4 py-4 lg:py-20">
           <div className="max-w-4xl mx-auto text-center">
             {/* Main Title */}
             <h1 className="text-2xl md:text-4xl lg:text-4xl font-bold text-white mb-6 leading-tight">
