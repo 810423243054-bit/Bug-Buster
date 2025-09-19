@@ -28,7 +28,7 @@ export default function Home() {
           <div className="max-w-4xl mx-auto text-center">
             {/* Main Title */}
             <h1 className="text-2xl md:text-4xl lg:text-4xl font-bold text-white mb-6 leading-tight">
-              Dhanalakshmi Srinivasan Engineering College (Autonomous)
+              Dhanalakshmi Srinivasan Engg College(A)
             </h1>
             <h1 className="text-2xl md:text-3xl lg:text-3xl font-bold text-white mb-6 leading-tight">
               Department of Artificial Intelligence & Data Science
