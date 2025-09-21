@@ -6,124 +6,233 @@ export interface ChallengeQuestion {
   buggyCode: string;
   correctAnswer: string;
   explanation: string;
+  output: string;
 }
 
 export const challengeQuestions: ChallengeQuestion[] = [
   {
     id: 1,
-    title: "Infinite Loop",
-    description: "This function should count from 1 to 10, but it never stops. Fix the loop condition.",
+    title: "Sum of First 10 Numbers",
+    description: "Fix the code so it prints the sum of the first 10 natural numbers.",
     difficulty: "Easy",
-    buggyCode: `def count_to_ten():\n    i = 1\n    while i <= 10:\n        print(i)\n        # Missing increment\n    print(\"Done!\")\n\ncount_to_ten()`,
-    correctAnswer: `def count_to_ten():\n    i = 1\n    while i <= 10:\n        print(i)\n        i += 1\n    print(\"Done!\")\n\ncount_to_ten()`,
-    explanation: "The loop variable 'i' was never incremented, causing an infinite loop."
+    buggyCode: `total = 0
+for i in range(1, 10):
+    total = total + i
+print("Sum =", total)`,
+    correctAnswer: `total = 0
+for i in range(1, 11):
+    total = total + i
+print("Sum =", total)`,
+    explanation: "The range should go up to 11 to include 10 in the sum.",
+    output: `Sum = 55`
   },
   {
     id: 2,
-    title: "List Index Error",
-    description: "This code tries to access list elements but fails. Fix the index issue.",
+    title: "Factorial of 5",
+    description: "Fix the code so it prints the factorial of 5.",
     difficulty: "Easy",
-    buggyCode: `numbers = [1, 2, 3, 4, 5]\nfor i in range(6):\n    print(numbers[i])`,
-    correctAnswer: `numbers = [1, 2, 3, 4, 5]\nfor i in range(5):\n    print(numbers[i])`,
-    explanation: "The range was 6 but the list only has 5 elements (indices 0-4)."
+    buggyCode: `n = 5
+fact = 1
+for i in range(1, n):
+    fact *= i
+print("Factorial:", fact)`,
+    correctAnswer: `n = 5
+fact = 1
+for i in range(1, n+1):
+    fact *= i
+print("Factorial:", fact)`,
+    explanation: "The range should go up to n+1 to include n in the multiplication.",
+    output: `Factorial: 120`
   },
   {
     id: 3,
-    title: "String Concatenation",
-    description: "This code should combine a string and number, but throws an error.",
+    title: "Palindrome Check",
+    description: "Fix the code so it checks if the word is a palindrome.",
     difficulty: "Easy",
-    buggyCode: `name = \"Alice\"\nage = 25\nmessage = \"Hello \" + name + \", you are \" + age + \" years old\"\nprint(message)`,
-    correctAnswer: `name = \"Alice\"\nage = 25\nmessage = \"Hello \" + name + \", you are \" + str(age) + \" years old\"\nprint(message)`,
-    explanation: "Cannot concatenate string and integer directly. Need to convert age to string."
+    buggyCode: `word = "madam"
+if word == word.reverse():
+    print("Palindrome")
+else:
+    print("Not Palindrome")`,
+    correctAnswer: `word = "madam"
+if word == word[::-1]:
+    print("Palindrome")
+else:
+    print("Not Palindrome")`,
+    explanation: "Strings do not have a reverse() method. Use slicing [::-1] to reverse a string.",
+    output: `Palindrome`
   },
   {
     id: 4,
-    title: "Dictionary KeyError",
-    description: "This code tries to access a dictionary key that might not exist.",
+    title: "Fibonacci Series (First 7 terms)",
+    description: "Fix the code so it prints the first 7 terms of the Fibonacci series.",
     difficulty: "Easy",
-    buggyCode: `student_grades = {\"Alice\": 85, \"Bob\": 92, \"Charlie\": 78}\nprint(student_grades[\"David\"])`,
-    correctAnswer: `student_grades = {\"Alice\": 85, \"Bob\": 92, \"Charlie\": 78}\nprint(student_grades.get(\"David\", \"Student not found\"))`,
-    explanation: "Use .get() method with a default value to safely access dictionary keys."
+    buggyCode: `n = 7
+a, b = 0, 0
+for i in range(n):
+    print(a, end=" ")
+    a, b = b, a+b`,
+    correctAnswer: `n = 7
+a, b = 0, 1
+for i in range(n):
+    print(a, end=" ")
+    a, b = b, a+b`,
+    explanation: "The second value should start at 1, not 0.",
+    output: `0 1 1 2 3 5 8 `
   },
   {
     id: 5,
-    title: "Function Return",
-    description: "This function should return the maximum of two numbers but doesn't work.",
+    title: "Largest Number in List",
+    description: "Fix the code so it finds the largest number in the list.",
     difficulty: "Easy",
-    buggyCode: `def max_number(a, b):\n    if a > b:\n        a\n    else:\n        b\n\nresult = max_number(5, 3)\nprint(result)`,
-    correctAnswer: `def max_number(a, b):\n    if a > b:\n        return a\n    else:\n        return b\n\nresult = max_number(5, 3)\nprint(result)`,
-    explanation: "Missing 'return' keywords. Functions need to explicitly return values."
+    buggyCode: `numbers = [2, 8, 5, 1, 9]
+largest = 0
+for x in numbers:
+    if x > largest:
+        largest = x
+print("Largest:", largest)`,
+    correctAnswer: `numbers = [2, 8, 5, 1, 9]
+largest = numbers[0]
+for x in numbers:
+    if x > largest:
+        largest = x
+print("Largest:", largest)`,
+    explanation: "Initialize 'largest' with the first element of the list, not 0.",
+    output: `Largest: 9`
   },
   {
     id: 6,
-    title: "String Formatting",
-    description: "This code has incorrect string formatting that causes an error.",
+    title: "Even / Odd Check",
+    description: "Fix the code so it checks if a number is even or odd.",
     difficulty: "Easy",
-    buggyCode: `name = \"John\"\nage = 30\nprint(\"My name is {name} and I am {age} years old\")`,
-    correctAnswer: `name = \"John\"\nage = 30\nprint(f\"My name is {name} and I am {age} years old\")`,
-    explanation: "Need 'f' before the string to use f-string formatting, or use .format() method."
+    buggyCode: `num = 15
+if num % 2 = 0:
+    print("Even")
+else:
+    print("Odd")`,
+    correctAnswer: `num = 15
+if num % 2 == 0:
+    print("Even")
+else:
+    print("Odd")`,
+    explanation: "Use '==' for comparison, not '=' which is assignment.",
+    output: `Odd`
   },
   {
     id: 7,
-    title: "Boolean Logic Error",
-    description: "This function should return True if a number is between 10 and 20, but the logic is wrong.",
+    title: "Prime Number Check (for n = 13)",
+    description: "Fix the code so it correctly checks if 13 is a prime number.",
     difficulty: "Easy",
-    buggyCode: `def is_between_10_and_20(num):\n    return num > 10 or num < 20\n\nprint(is_between_10_and_20(5))   # Should be False\nprint(is_between_10_and_20(15))  # Should be True`,
-    correctAnswer: `def is_between_10_and_20(num):\n    return num > 10 and num < 20\n\nprint(is_between_10_and_20(5))   # Should be False\nprint(is_between_10_and_20(15))  # Should be True`,
-    explanation: "Should use 'and' not 'or' for checking if a number is within a range."
+    buggyCode: `n = 13
+for i in range(2, n//2):
+    if n % i == 0:
+        print("Not Prime")
+        break
+else:
+    print("Prime")`,
+    correctAnswer: `n = 13
+for i in range(2, (n//2) + 1):
+    if n % i == 0:
+        print("Not Prime")
+        break
+else:
+    print("Prime")`,
+    explanation: "The range should include n//2, so use (n//2) + 1.",
+    output: `Prime`
   },
   {
     id: 8,
-    title: "Integer Division",
-    description: "This code should perform integer division but gives float result in Python 3.",
+    title: "Access Dictionary Key",
+    description: "Fix the code so it accesses the correct key in the dictionary.",
     difficulty: "Easy",
-    buggyCode: `def calculate_pages(total_items, items_per_page):\n    return total_items / items_per_page\n\npages = calculate_pages(25, 5)\nprint(f\"Number of pages: {pages}\")`,
-    correctAnswer: `def calculate_pages(total_items, items_per_page):\n    return total_items // items_per_page\n\npages = calculate_pages(25, 5)\nprint(f\"Number of pages: {pages}\")`,
-    explanation: "Use '//' for integer division instead of '/' which gives float result in Python 3."
+    buggyCode: `student = {"name": "Rahul", "age": 20}
+print(student["class"])`,
+    correctAnswer: `student = {"name": "Rahul", "age": 20}
+print(student["name"])`,
+    explanation: "The key 'class' does not exist. Use an existing key like 'name'.",
+    output: `Rahul`
   },
   {
     id: 9,
-    title: "Set vs List",
-    description: "This code should find unique elements but uses the wrong data structure.",
+    title: "Reverse a List",
+    description: "Fix the code so it prints the reversed list.",
     difficulty: "Easy",
-    buggyCode: `numbers = [1, 2, 2, 3, 3, 4, 4, 5]\nunique_numbers = []\nfor num in numbers:\n    if num not in unique_numbers:\n        unique_numbers.append(num)\nprint(unique_numbers)`,
-    correctAnswer: `numbers = [1, 2, 2, 3, 3, 4, 4, 5]\nunique_numbers = list(set(numbers))\nprint(unique_numbers)`,
-    explanation: "Using set() is more efficient for finding unique elements than manually checking a list."
+    buggyCode: `lst = [1, 2, 3, 4, 5]
+rev = lst.reverse()
+print(rev)`,
+    correctAnswer: `lst = [1, 2, 3, 4, 5]
+lst.reverse()
+print(lst)`,
+    explanation: "The reverse() method reverses the list in place and returns None.",
+    output: `[5, 4, 3, 2, 1]`
   },
   {
     id: 10,
-    title: "String Method Error",
-    description: "This code tries to use a string method that doesn't exist.",
+    title: "Convert to Uppercase",
+    description: "Fix the code so it prints the text in uppercase.",
     difficulty: "Easy",
-    buggyCode: `text = \"Hello World\"\nresult = text.reverse()\nprint(result)`,
-    correctAnswer: `text = \"Hello World\"\nresult = text[::-1]\nprint(result)`,
-    explanation: "Strings don't have a reverse() method. Use slicing [::-1] to reverse a string."
+    buggyCode: `text = "python"
+print(text.uppercase())`,
+    correctAnswer: `text = "python"
+print(text.upper())`,
+    explanation: "The correct method is upper(), not uppercase().",
+    output: `PYTHON`
   },
   {
     id: 11,
-    title: "Import Error",
-    description: "This code tries to import a function incorrectly.",
+    title: "Find Average of Marks",
+    description: "Fix the code so it prints the correct average of marks.",
     difficulty: "Easy",
-    buggyCode: `import math\nresult = sqrt(16)\nprint(result)`,
-    correctAnswer: `import math\nresult = math.sqrt(16)\nprint(result)`,
-    explanation: "When using 'import math', access functions with 'math.sqrt()' or use 'from math import sqrt'."
+    buggyCode: `marks = [45, 55, 65, 75]
+avg = sum(marks) / len(marks) - 1
+print("Average:", avg)`,
+    correctAnswer: `marks = [45, 55, 65, 75]
+avg = sum(marks) / len(marks)
+print("Average:", avg)`,
+    explanation: "Do not subtract 1 from the average calculation.",
+    output: `Average: 60.0`
   },
   {
     id: 12,
-    title: "Tuple Assignment",
-    description: "This code tries to modify a tuple element, which is not allowed.",
+    title: "Count Vowels in String",
+    description: "Fix the code so it counts the number of vowels in the string.",
     difficulty: "Easy",
-    buggyCode: `coordinates = (3, 4)\ncoordinates[0] = 5\nprint(coordinates)`,
-    correctAnswer: `coordinates = [3, 4]  # Use list instead of tuple\ncoordinates[0] = 5\nprint(coordinates)`,
-    explanation: "Tuples are immutable. Use a list if you need to modify elements."
+    buggyCode: `text = "education"
+count = 0
+for ch in text:
+    if ch in ["a", "e", "i", "o", "u"]:
+        count = count + 1
+print("Vowels:", countt)`,
+    correctAnswer: `text = "education"
+count = 0
+for ch in text:
+    if ch in ["a", "e", "i", "o", "u"]:
+        count = count + 1
+print("Vowels:", count)`,
+    explanation: "The variable name should be 'count', not 'countt'.",
+    output: `Vowels: 5`
   },
   {
     id: 13,
-    title: "Type Comparison",
-    description: "This code uses incorrect comparison operators for checking equality.",
+    title: "Multiplication Table of 5",
+    description: "Fix the code so it prints the multiplication table of 5 up to 10.",
     difficulty: "Easy",
-    buggyCode: `def check_value(x):\n    if x = 10:\n        return \"Equal to 10\"\n    elif x > 10:\n        return \"Greater than 10\"\n    else:\n        return \"Less than 10\"\n\nresult = check_value(10)\nprint(result)`,
-    correctAnswer: `def check_value(x):\n    if x == 10:\n        return \"Equal to 10\"\n    elif x > 10:\n        return \"Greater than 10\"\n    else:\n        return \"Less than 10\"\n\nresult = check_value(10)\nprint(result)`,
-    explanation: "Use '==' for comparison, not '=' which is for assignment."
+    buggyCode: `n = 5
+for i in range(1, 10):
+    print(n, "x", i, "=", n*i)`,
+    correctAnswer: `n = 5
+for i in range(1, 11):
+    print(n, "x", i, "=", n*i)`,
+    explanation: "The range should go up to 11 to include 10 in the table.",
+    output: `5 x 1 = 5
+5 x 2 = 10
+5 x 3 = 15
+5 x 4 = 20
+5 x 5 = 25
+5 x 6 = 30
+5 x 7 = 35
+5 x 8 = 40
+5 x 9 = 45
+5 x 10 = 50`
   }
 ];
