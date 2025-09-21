@@ -137,7 +137,7 @@ export function CoordinatorDashboard() {
                 <Clock className="w-8 h-8 text-green-400 mr-3" />
                 <div>
                   <p className="text-2xl font-bold text-white">{averageScore}</p>
-                  <p className="text-purple-200 text-sm">Avg Score (/30)</p>
+                  <p className="text-purple-200 text-sm">Avg Score (/13)</p>
                 </div>
               </div>
             </CardContent>
